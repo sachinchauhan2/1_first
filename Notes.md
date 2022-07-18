@@ -1,10 +1,48 @@
 # React Redux-Toolkit Notes
 
-`store` :  ""
+##  `store` :    
+```javascript
+import { configureStore } from '@reduxjs/toolkit'
 
-`Reducer`: 
+const store = configureStore({
+  // reducer:(state)=>{
+  //   return state
+  // },
+  // preloadedState: initialState
+  reducer:userReducer,
+})
 
-~~=Old method~~
+
+```
+---
+```javascript
+import {useSelector,useDispatch} from 'react-redux'
+```
+### `useSelector`: 
+- ```javascript
+    const {name,age,status}=useSelector((state)=>{
+        console.log(state)
+        return state
+    })
+
+     ```
+
+### `useDispatch`
+
+- ```javascript
+    const dispatch = useDispatch()
+
+
+    const updateAge = (age)=>{
+        dispatch({type:'UPDATE_AGE',payload:age})
+        // type always is string
+    }
+
+  ```
+
+##  `Reducer`: 
+
+  ~~Old method~~
 - ```javascript
     // old method
     export default (state = initialState, action) => {
@@ -19,14 +57,35 @@
     ```
 **New Method**
 -  ``` javascript
-    import { createReducer } from "@reduxjs/toolkit"
-
-
     export default createReducer(initialState, (builder) => {
         builder.addCase('UPDATE_AGE', (state, action) => {
             state.age = action.payload
         })
+        builder.addCase('UPDATE_NAME', (state, action) => {
+            state.name = action.payload
+        })
+        builder.addCase('UPDATE_STATUS', (state, action) => {
+            state.status = action.payload
+        })
     })
-
-
     ```
+
+# Action
+
+```javascript
+// old method with  by defult 
+export default (state) => {
+    return {
+        type: 'UPDATE_STATUS',
+        payload: state
+    }
+}
+```
+`Using redux toolkit very easy`
+
+```javascript
+import { createAction } from '@reduxjs/toolkit'
+export const updateStatus = createAction('UPDATE_STATUS')
+
+
+```
