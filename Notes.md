@@ -55,8 +55,12 @@ import {useSelector,useDispatch} from 'react-redux'
          return state
     }
     ```
-**New Method**
--  ``` javascript
+**New Method** --> using redux toolkit
+-  ```javascript
+
+    import { createReducer } from "@reduxjs/toolkit"
+    import { updateStatus } from '../action'
+
     export default createReducer(initialState, (builder) => {
         builder.addCase('UPDATE_AGE', (state, action) => {
             state.age = action.payload
@@ -64,9 +68,22 @@ import {useSelector,useDispatch} from 'react-redux'
         builder.addCase('UPDATE_NAME', (state, action) => {
             state.name = action.payload
         })
-        builder.addCase('UPDATE_STATUS', (state, action) => {
+        builder.addCase(updateStatus, (state, action) => {
             state.status = action.payload
         })
+        `
+            Note : we can use like this but output will same
+
+
+            builder.addCase(updateStatus.type, (state, action) => {
+                state.status = action.payload
+            })
+
+            builder.addCase(updateStatus.toString(), (state, action) => {
+                state.status = action.payload
+            })
+        `
+
     })
     ```
 
