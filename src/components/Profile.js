@@ -17,6 +17,8 @@ function Profile() {
     }
 
     const updateName = (name)=>{
+        const res = await fetch('https://josnplaceholder.typicode.com/users')
+        const result = await res.json()
         dispatch({type:'UPDATE_NAME',payload:name})
     }
     const updateStatusvalue = (status)=>{
