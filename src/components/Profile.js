@@ -1,7 +1,8 @@
 import React from 'react'
+// import {updateStatus,fetchName} from '../action'
 import {useSelector,useDispatch} from 'react-redux'
-// import updateStatus from '../action'
-import {updateStatus} from '../action'
+import { updateName,updateAge,updateStatus } from '../userReducer'
+
 
 
 function Profile() {
@@ -12,16 +13,27 @@ function Profile() {
 
     const dispatch = useDispatch()
 
-    const updateAge = (age)=>{
-        dispatch({type:'UPDATE_AGE',payload:age})
+    // const updateAge = (age)=>{
+    //     dispatch({type:'UPDATE_AGE',payload:age})
+    // }
+    const changeAge = (age)=>{
+        dispatch(updateAge(age))
     }
 
-    const updateName = (name)=>{
-        const res = await fetch('https://josnplaceholder.typicode.com/users')
-        const result = await res.json()
-        dispatch({type:'UPDATE_NAME',payload:name})
+    // const updateName = ()=>{
+    //     // const res = await fetch('https://jsonplaceholder.typicode.com/users')
+    //     // const result = await res.json()
+    //     // dispatch({type:'UPDATE_NAME',payload:result[0].name})
+    //     dispatch(fetchName())
+    // }
+
+    const changeName = (name)=>{
+        dispatch(updateName(name))
     }
-    const updateStatusvalue = (status)=>{
+    // const updateStatusvalue = (status)=>{
+    //     dispatch(updateStatus(status))
+    // }
+    const changeStatus = (status)=>{
         dispatch(updateStatus(status))
     }
 
@@ -31,9 +43,9 @@ function Profile() {
         <h2>{name}</h2>
         <h2>{age}</h2>
         <h2>{status}</h2>
-        <button onClick={()=>updateAge(30)}>Update Age</button>
-        <button onClick={()=>updateName('Sachin')}>Update Name</button>
-        <button onClick={()=>updateStatusvalue('signal')}>Update status</button>
+        <button onClick={()=>changeAge(30)}>Update Age</button>
+        <button onClick={()=>changeName('Sachin')}>Update Name</button>
+        <button onClick={()=>changeStatus('signal')}>Update status</button>
 
 
     </div>

@@ -91,3 +91,36 @@ export default (state) => {
 import { createAction } from '@reduxjs/toolkit'
 export const updateStatus = createAction('UPDATE_STATUS')
 ```
+
+
+
+## create Slice ---- (*IMP (MAIN) in Redux Toolkit)
+#### It will remove createReducer and action file in project
+#### `action` & `reducer` will same using *`createSlice`*
+
+
+
+```javascript
+const userReducer = createSlice({
+    name: 'person',
+
+    initialState,
+    reducers: {
+        updateName(state, action) {
+            state.name = action.payload
+        },
+        updateAge(state, action) {
+            state.age = action.payload
+        },
+        updateStatus(state, action) {
+            state.status = action.payload
+        }
+    }
+
+})
+
+export const { updateName, updateStatus, updateAge } = userReducer.actions  # this will become action
+export default userReducer.reducer # this will reducer
+
+```
+
