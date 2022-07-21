@@ -1,5 +1,5 @@
 # React Redux-Toolkit Notes
-
+E:\web developnment\1_first
 ##  `store` :    
 ```javascript
 import { configureStore } from '@reduxjs/toolkit'
@@ -116,11 +116,73 @@ const userReducer = createSlice({
             state.status = action.payload
         }
     }
-
 })
 
-export const { updateName, updateStatus, updateAge } = userReducer.actions  # this will become action
-export default userReducer.reducer # this will reducer
+export const { updateName, updateStatus, updateAge } = userReducer.actions  #this will become action
+export default userReducer.reducer #this will reducer
 
 ```
 
+
+
+# `createAsyncThunk`
+using in async data fetch 
+
+extra feacture give 
+- status update like
+    - fulfilled
+    - pending 
+    - rejected
+
+make function in reducer/createslice file (both are same)
+
+```javascript
+
+export const fetchUserName = createAsyncThunk(
+    'fetchUser',
+    async() => {
+        const res = await fetch('https://jsonplaceholder.typicode.com/users')
+        const result = await res.json()
+        return result[Math.floor(Math.random() * 10)].name
+    }
+)
+```
+
+for status 
+```javascript
+
+const userReducer = createSlice({
+    name: 'person', // put  any name it will use internaly no use of this name 
+    initialState,
+    reducers: {
+        updateName(state, action) {
+            state.name = action.payload
+        },
+        updateAge(state, action) {
+            state.age = action.payload
+        },
+        updateStatus(state, action) {
+            state.status = action.payload
+        },
+    },
+    extraReducers: {
+        [fetchUserName.fulfilled]: (state, action) => {
+            state.name = action.payload
+        },
+        [fetchUserName.pendingg]: (state, action) => {
+            state.name = 'loading'
+        },
+        [fetchUserName.rejected]: (state, action) => {
+            state.name = 'try again'
+        },
+    }
+
+})
+```
+directly use function is other component 
+
+**fetchUserName**
+```javascript
+
+import { updateName,updateAge,updateStatus,fetchUserName} from '../userReducer'
+```

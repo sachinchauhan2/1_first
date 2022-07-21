@@ -1,7 +1,7 @@
 import React from 'react'
 // import {updateStatus,fetchName} from '../action'
 import {useSelector,useDispatch} from 'react-redux'
-import { updateName,updateAge,updateStatus } from '../userReducer'
+import { updateName,updateAge,updateStatus,fetchUserName} from '../userReducer'
 
 
 
@@ -27,8 +27,9 @@ function Profile() {
     //     dispatch(fetchName())
     // }
 
-    const changeName = (name)=>{
-        dispatch(updateName(name))
+    const changeName = ()=>{
+
+        dispatch(fetchUserName())
     }
     // const updateStatusvalue = (status)=>{
     //     dispatch(updateStatus(status))
@@ -44,7 +45,7 @@ function Profile() {
         <h2>{age}</h2>
         <h2>{status}</h2>
         <button onClick={()=>changeAge(30)}>Update Age</button>
-        <button onClick={()=>changeName('Sachin')}>Update Name</button>
+        <button onClick={()=>changeName()}>Update Name</button>
         <button onClick={()=>changeStatus('signal')}>Update status</button>
 
 
