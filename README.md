@@ -179,7 +179,7 @@ const userReducer = createSlice({
 
 })
 ```
-directly use function is other component 
+directly use function in other component 
 
 **fetchUserName**
 ```javascript
